@@ -94,25 +94,31 @@ function App() {
     return (
         <main className="chatGPT-app  ">
 
-            <div className=" flex items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2 mb-16">
-                <img className=" my-4 ml-8 w-40 h-10" src="/ParkClear 1.png" alt="logo" />
+            <div className=" flex  items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2 mb-10 mt-5 ">
+                <img className=" md:my-4 my-2 md:ml-8 w-20 h-20 object-contain" src="/logo.png" alt="logo" />
 
-                <div className="flex items-center justify-between w-full md:mt-0 mt-4 ">
+                <div className="flex items-center flex-col w-full md:mt-0">
 
 
                     {/* Center Heading with Bot Image */}
-                    <div className="absolute md:left-1/2 transform md:-translate-x-1/2 flex items-center md:space-x-3  max-[500px]:w-full ">
-                        <p className="text-[#05ACC0] text-xl md:text-4xl font-bold">
+                    <div className="  flex items-center md:space-x-3  max-[500px]:w-full  ">
+                        <p className="text-[#05ACC0] text-xl md:text-4xl font-extrabold">
                             How can I help <span className="text-[#FF6600]">you today?</span>
+
                         </p>
                         <img src={bot} className="w-8 h-8 md:w-12 md:h-12" alt="bot" />
                     </div>
+                    <span className="w-10/12">
+                        <p className=" text-center my-2">Your intelligent parking companion — ParkClear Assistant provides instant help for tickets, appeals, routes, and more. Save time, reduce fines, and drive confidently with AI-powered support.</p>
+                    </span>
+
                 </div>
+
 
             </div>
 
 
-            <section className=" h-[520px]  flex flex-col items-center md:px-10 px-2   ">
+            <section className=" h-[520px]  flex flex-col items-center md:px-10 px-2  bg-[#FFFAF1] rounded-2xl py-4">
 
                 <div className="layout w-2/3 mb-2">
                     {posts.map((post, index) => (
@@ -148,7 +154,7 @@ function App() {
                         </div>
                     ))}
                 </div>
-                <footer className="md:w-2/3 w-full flex items-center justify-center bg-gray-100 text-black">
+                <footer className="md:w-2/3 w-full flex items-center justify-center bg-[#FFFAF1] text-black mb-2 border border-gray-300">
                     <input
                         className="composebar"
                         value={input}
