@@ -18,57 +18,92 @@ function App() {
     }, [posts]);
 
     const fetchBotResponse = async () => {
+        // Filter messages to keep a clean chat history for OpenAI
+        const history = posts
+            .filter((p) => p.type === "user" || p.type === "bot")
+            .map((p) => ({
+                role: p.type === "user" ? "user" : "assistant",
+                content: p.post,
+            }));
+    
+        // Add the current user input at the end
+        history.push({
+            role: "user",
+            content: input,
+        });
+    
         const { data } = await axios.post(
-
             `${import.meta.env.VITE_SERVER_URL}`,
-            { input },
+            { history },
             {
                 headers: {
                     "Content-Type": "application/json",
                 },
             }
         );
-        console.log("data from server", data)
+    
+        console.log("data from server", data);
         return data;
     };
+    
 
     const autoTypingBotResponse = (text) => {
         let index = 0;
-        let interval = setInterval(() => {
-            if (index < text.length) {
-                setPosts((prevState) => {
-                    let lastItem = prevState.pop();
-                    if (lastItem.type !== "bot") {
-                        prevState.push({
-                            type: "bot",
-                            post: text.charAt(index - 1),
-                        });
-                    } else {
-                        prevState.push({
-                            type: "bot",
-                            post: lastItem.post + text.charAt(index - 1),
-                        });
-                    }
-                    return [...prevState];
-                });
-                index++;
-            } else {
-                clearInterval(interval);
-            }
+    
+        setPosts((prevState) => {
+            return [
+                ...prevState,
+                {
+                    type: "bot",
+                    post: "",
+                },
+            ];
+        });
+    
+        const interval = setInterval(() => {
+            setPosts((prevState) => {
+                const updatedPosts = [...prevState];
+                const lastIndex = updatedPosts.length - 1;
+    
+                if (index < text.length) {
+                    updatedPosts[lastIndex] = {
+                        ...updatedPosts[lastIndex],
+                        post: updatedPosts[lastIndex].post + text.charAt(index),
+                    };
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+    
+                return updatedPosts;
+            });
         }, 20);
     };
-
+    
     const onSubmit = () => {
         if (input.trim() === "") return;
-        updatePosts(input);
-        updatePosts("loading...", false, true);
+        updatePosts(input); // User message
+        updatePosts("loading...", false, true); // Show loading spinner
         setInput("");
+    
         fetchBotResponse().then((res) => {
             console.log(res.bot.trim());
+    
+            // Remove the loading post
+            setPosts((prevPosts) => {
+                const newPosts = [...prevPosts];
+                // Remove the last "loading" post
+                if (newPosts.length && newPosts[newPosts.length - 1].type === "loading") {
+                    newPosts.pop();
+                }
+                return newPosts;
+            });
+    
+            // Then start typing animation
             updatePosts(res.bot.trim(), true);
         });
     };
-
+    
     const updatePosts = (post, isBot, isLoading) => {
         if (isBot) {
             autoTypingBotResponse(post);
