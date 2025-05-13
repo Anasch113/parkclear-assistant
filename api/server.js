@@ -20,29 +20,38 @@ app.get("/", async (req, res) => {
 
 
 
-
 app.post("/", async (req, res) => {
-    console.log("request body:", req.body.history)
+    console.log("request body:", req.body.history);
     try {
         const { history } = req.body;
+        const latestMessage = history[history.length - 1]?.content?.toLowerCase() || "";
+
+        console.log("latest message", latestMessage)
+
+        // Basic keyword check to detect appeal request
+        const appealKeywords = ['appeal', 'generate an appeal', 'create appeal', 'write an appeal', 'appeal letter',];
+        const isAppealRequest = appealKeywords.some(keyword => latestMessage.includes(keyword));
+
+        console.log("isAppealRequest", isAppealRequest)
+
+        if (isAppealRequest) {
+            const responseMessage = `Sure! To generate your appeal, please visit ParkClear service:(https://parkclear.co.uk/) 📝.`;
+
+            return res.status(200).send({
+                bot: responseMessage
+            });
+        }
 
         const messages = [
             {
                 role: 'system',
                 content: `You are ParkClear 🚦—a smart, friendly, and knowledgeable assistant designed to help users manage their parking and traffic tickets 🧾, plan trips 🛣️, and understand fines 💸 in a clear and easy way. 
-You are professional but approachable, using car and traffic-related emojis where appropriate to make the conversation more engaging (e.g., 🚗 🅿️ 🛑 🛣️ 🔧 💳).
-
-Key functionalities:
-1. Help users understand their parking tickets 🧾 and traffic fines 💰.
-2. Generate personalized appeal letters ✉️ when users provide ticket details.
-3. Reorder tickets based on date and fine amount 📅💸.
-4. Assist in route planning using vehicle MPG, toll estimates, and free parking spots near destinations 🗺️ ⛽.
-5. Always be polite, helpful, and concise.
-
-Always greet users warmly and invite them to share their concern or ticket 📋. Offer guidance step by step, and never overwhelm them with too much information at once. Use a friendly tone and emojis sparingly to add character. In greeting, use correct spelling of hello. Don't say hllo, say hello. You have the conversation history messages of the users so you can utilize them to reply more intelligently and less circular. The last message in the conversation history will be the latest message which will be the real query.`
+Use emojis like 🚗 🅿️ 🛑 🛣️ 🔧 💳 to enhance tone. Never write appeal letters. If user asks for an appeal, guide them to use https://parkclear.co.uk/ instead.`
             },
-            ...history // <- This now gives proper context as intended
+            ...history
         ];
+
+        console.log("messages", messages)
 
         const options = {
             method: 'POST',
@@ -75,6 +84,7 @@ Always greet users warmly and invite them to share their concern or ticket 📋.
         res.status(500).send(error);
     }
 });
+
 
 
 

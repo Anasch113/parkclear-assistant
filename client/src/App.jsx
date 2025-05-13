@@ -25,13 +25,13 @@ function App() {
                 role: p.type === "user" ? "user" : "assistant",
                 content: p.post,
             }));
-    
+
         // Add the current user input at the end
         history.push({
             role: "user",
             content: input,
         });
-    
+
         const { data } = await axios.post(
             `${import.meta.env.VITE_SERVER_URL}`,
             { history },
@@ -41,15 +41,15 @@ function App() {
                 },
             }
         );
-    
+
         console.log("data from server", data);
         return data;
     };
-    
+
 
     const autoTypingBotResponse = (text) => {
         let index = 0;
-    
+
         setPosts((prevState) => {
             return [
                 ...prevState,
@@ -59,12 +59,12 @@ function App() {
                 },
             ];
         });
-    
+
         const interval = setInterval(() => {
             setPosts((prevState) => {
                 const updatedPosts = [...prevState];
                 const lastIndex = updatedPosts.length - 1;
-    
+
                 if (index < text.length) {
                     updatedPosts[lastIndex] = {
                         ...updatedPosts[lastIndex],
@@ -74,21 +74,21 @@ function App() {
                 } else {
                     clearInterval(interval);
                 }
-    
+
                 return updatedPosts;
             });
         }, 20);
     };
-    
+
     const onSubmit = () => {
         if (input.trim() === "") return;
         updatePosts(input); // User message
         updatePosts("loading...", false, true); // Show loading spinner
         setInput("");
-    
+
         fetchBotResponse().then((res) => {
             console.log(res.bot.trim());
-    
+
             // Remove the loading post
             setPosts((prevPosts) => {
                 const newPosts = [...prevPosts];
@@ -98,12 +98,12 @@ function App() {
                 }
                 return newPosts;
             });
-    
+
             // Then start typing animation
             updatePosts(res.bot.trim(), true);
         });
     };
-    
+
     const updatePosts = (post, isBot, isLoading) => {
         if (isBot) {
             autoTypingBotResponse(post);
@@ -132,12 +132,10 @@ function App() {
             <div className=" flex  items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2 mb-10 mt-5 ">
                 <img className=" md:my-4 my-2 md:ml-8 w-20 h-20 object-contain" src="/logo.png" alt="logo" />
 
-                <div className="flex items-center flex-col w-full md:mt-0">
-
-
+                <div className="flex items-center flex-col w-full md:mt-0 ">
                     {/* Center Heading with Bot Image */}
-                    <div className="  flex items-center md:space-x-3  max-[500px]:w-full  ">
-                        <p className="text-[#05ACC0] text-xl md:text-4xl font-extrabold">
+                    <div className="  flex items-center justify-center md:space-x-3  max-[500px]:w-full ">
+                        <p className="text-[#05ACC0] text-xl md:text-4xl font-extrabold ">
                             How can I help <span className="text-[#FF6600]">you today?</span>
 
                         </p>
