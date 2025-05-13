@@ -130,7 +130,7 @@ function App() {
         <main className="chatGPT-app  ">
 
             <div className=" flex  items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2 mb-10 mt-5 ">
-                <img className=" md:my-4 my-2 md:ml-8 w-20 h-20 object-contain" src="/logo.png" alt="logo" />
+                <img className=" md:my-4 my-2 md:ml-8 w-40" src="/ParkClear-new.png" alt="logo" />
 
                 <div className="flex items-center flex-col w-full md:mt-0 ">
                     {/* Center Heading with Bot Image */}
