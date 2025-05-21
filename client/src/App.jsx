@@ -131,18 +131,18 @@ function App() {
     return (
         <main className="chatGPT-app  ">
 
-            <div className="flex items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2">
+            <divmd className="flex md:items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2">
                 <div className="relative">
                     <img className="md:my-4 my-2 md:ml-8 w-40" src="/ParkClear-new.png" alt="logo" />
 
                     {/* Assistant Badge */}
-                    <span className="absolute top-4 -right-24 bg-gray-100 text-black text-sm px-3 py-2 rounded-xl  shadow-">
+                    <span className="absolute md:top-4 md:-right-24 top-2 right-28 bg-gray-100 text-black text-sm px-3 py-2 rounded-xl  shadow-">
                         Assistant
                     </span>
                 </div>
 
                 {/* Other content */}
-            </div>
+            </divmd>
 
 
 
