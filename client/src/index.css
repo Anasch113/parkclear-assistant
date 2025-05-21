@@ -51,15 +51,15 @@ footer {
 
 .composebar {
     padding: 0 10px;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 16px;
-    line-height: 30px;
+    
 
     outline: 0;
     border: 0;
-    max-width: calc(100% - 120px);
-    min-width: calc(100% - 120px);
+    
     background-color: transparent;
+    border-radius: 20px;
 }
 
 .send-button {
@@ -67,9 +67,9 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 15px 25px;
-    height: 40px;
-    background: linear-gradient(269deg, #d9d9d9 1.77%, #d9d9d9 99.15%);
-    border-radius: 47px;
+    height: px;
+  
+    border-radius: 10px;
     cursor: pointer;
 }
 
@@ -120,12 +120,12 @@ footer {
 }
 
 .post {
-    padding: 10px 20px;
+    padding: 20px 20px;
     width: fit-content;
     max-width: 100%;
     min-height: 40px;
     background: #05ACC0;
-    border-radius: 22px;
+    border-radius: 4px;
     white-space: pre-wrap;
     color: white;
 }

@@ -6,6 +6,7 @@ import user from "./assets/user.png";
 import bot from "/car.png";
 import loadingIcon from "/car-animation.webm";
 import { DotLottieReact, } from '@lottiefiles/dotlottie-react';
+import { IoIosArrowRoundForward } from "react-icons/io";
 // import loadingIcon from "./assets/loader.svg";
 
 function App() {
@@ -151,7 +152,7 @@ function App() {
             </div>
 
 
-            <section className=" h-[520px]  flex flex-col items-center md:px-10 px-2  bg-[#FFFAF1] rounded-2xl py-4">
+            <section className=" h-[570px]  flex flex-col items-center md:px-10 px-2  bg-[#FFFAF1] rounded-2xl py-4">
 
                 <div className="layout w-2/3 mb-2">
                     {posts.map((post, index) => (
@@ -187,20 +188,24 @@ function App() {
                         </div>
                     ))}
                 </div>
-                <footer className="md:w-2/3 w-full flex items-center justify-center bg-[#FFFAF1] text-black mb-2 border border-gray-300">
-                    <input
-                        className="composebar"
-                        value={input}
-                        autoFocus
-                        type="text"
-                        placeholder="Start chatting… "
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyUp={onKeyUp}
-                    />
-                    <div className="send-button" onClick={onSubmit}>
-                        <img src={send} />
+                <div className="flex w-full items-center justify-center gap-2 ">
+                   
+                        <input
+                            className="md:w-2/3 w-full flex items-center justify-center bg-[#FFFAF1] text-black mb-2 border border-gray-400 rounded-md  outline-none px-4 py-5"
+                            value={input}
+                            autoFocus
+                            type="text"
+                            placeholder="Ask ParkClear Assistant... "
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyUp={onKeyUp}
+                        />
+
+                   
+                    <div className="flex items-center justify-center cursor-pointer py-5 px-3 rounded-md bg-[#05ACC0]" onClick={onSubmit}>
+                        <IoIosArrowRoundForward className="text-white" size={25}/>
                     </div>
-                </footer>
+                </div>
+
             </section>
 
         </main>
