@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -130,29 +131,22 @@ function App() {
     return (
         <main className="chatGPT-app  ">
 
-            <div className=" flex  items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2 mb-10 mt-5 ">
-                <img className=" md:my-4 my-2 md:ml-8 w-40" src="/ParkClear-new.png" alt="logo" />
+            <div className="flex items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2">
+                <div className="relative">
+                    <img className="md:my-4 my-2 md:ml-8 w-40" src="/ParkClear-new.png" alt="logo" />
 
-                <div className="flex items-center flex-col w-full md:mt-0 ">
-                    {/* Center Heading with Bot Image */}
-                    <div className="  flex items-center justify-center md:space-x-3  max-[500px]:w-full ">
-                        <p className="text-[#05ACC0] text-xl md:text-4xl font-extrabold ">
-                            How can I help <span className="text-[#FF6600]">you today?</span>
-
-                        </p>
-                        <img src={bot} className="w-8 h-8 md:w-12 md:h-12" alt="bot" />
-                    </div>
-                    <span className="w-10/12">
-                        <p className=" text-center my-2">Your intelligent parking companion — ParkClear Assistant provides instant help for tickets, appeals, routes, and more. Save time, reduce fines, and drive confidently with AI-powered support.</p>
+                    {/* Assistant Badge */}
+                    <span className="absolute top-4 -right-24 bg-gray-100 text-black text-sm px-3 py-2 rounded-xl  shadow-">
+                        Assistant
                     </span>
-
                 </div>
 
-
+                {/* Other content */}
             </div>
 
 
-            <section className=" h-[570px]  flex flex-col items-center md:px-10 px-2  bg-[#FFFAF1] rounded-2xl py-4">
+
+            <section className=" h-[680px]  flex flex-col items-center md:px-10 px-2  bg-[#FFFAF1] rounded-2xl py-6">
 
                 <div className="layout w-2/3 mb-2">
                     {posts.map((post, index) => (
@@ -189,20 +183,20 @@ function App() {
                     ))}
                 </div>
                 <div className="flex w-full items-center justify-center gap-2 ">
-                   
-                        <input
-                            className="md:w-2/3 w-full flex items-center justify-center bg-[#FFFAF1] text-black mb-2 border border-gray-400 rounded-md  outline-none px-4 py-5"
-                            value={input}
-                            autoFocus
-                            type="text"
-                            placeholder="Ask ParkClear Assistant... "
-                            onChange={(e) => setInput(e.target.value)}
-                            onKeyUp={onKeyUp}
-                        />
 
-                   
-                    <div className="flex items-center justify-center cursor-pointer py-5 px-3 rounded-md bg-[#05ACC0]" onClick={onSubmit}>
-                        <IoIosArrowRoundForward className="text-white" size={25}/>
+                    <input
+                        className="md:w-2/3 w-full flex items-center justify-center bg-[#FFFAF1] text-black mb-2 border border-gray-400 rounded-md  outline-none px-4 py-5"
+                        value={input}
+                        autoFocus
+                        type="text"
+                        placeholder="Ask ParkClear Assistant... "
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyUp={onKeyUp}
+                    />
+
+
+                    <div className="flex items-center justify-center cursor-pointer py-5 px-3 rounded-md bg-[#eee0c6]" onClick={onSubmit}>
+                        <IoIosArrowRoundForward className="text-black" size={25} />
                     </div>
                 </div>
 
