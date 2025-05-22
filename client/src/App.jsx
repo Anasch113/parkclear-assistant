@@ -150,24 +150,29 @@ function App() {
 
 
 
-            <div className="flex md:items-center justify-between md:flex-row flex-col md:gap-0 gap-10 w-full  border">
+            <div className="flex md:items-center justify-between md:flex-row md:gap-0 gap-10 w-full  border-b">
 
-                <div className="relative px-2">
-                    <img className="md:my-4 my-2 md:ml-8 w-40" src="/ParkClear-new.png" alt="logo" />
+                <div className="relative px-2 flex items-center md:block">
+                    <img
+                        className="md:my-4 my-2 md:ml-8 w-40"
+                        src="/ParkClear-new.png"
+                        alt="logo"
+                    />
 
                     {/* Assistant Badge */}
-                    <span className="absolute md:top-4 md:-right-24 top-2 right-28 bg-gray-100 dark:bg-gray-800 dark:text-white text-black text-sm px-3 py-2 rounded-xl  shadow-">
+                    <span className="ml-3 md:ml-0 md:absolute md:top-4 md:-right-24 bg-gray-100 dark:bg-gray-800 text-black dark:text-white text-sm max-[500px]:text-xs px-3 py-1 rounded-xl shadow">
                         Assistant
                     </span>
                 </div>
-                <div className="px-2">
 
-                <button
-                    onClick={() => setDarkMode(!darkMode)}
-                    className="bg-gray-300 dark:bg-gray-700 px-4 py-2 rounded-md text-black dark:text-white"
-                >
-                    {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-                </button>
+                <div className="px-2 flex items-center">
+
+                    <button
+                        onClick={() => setDarkMode(!darkMode)}
+                        className="bg-gray-300 dark:bg-gray-700 md:px-4 md:py-2  p-1 rounded-md text-black dark:text-white max-[500px]:text-xs"
+                    >
+                        {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                    </button>
 
                 </div>
 
@@ -215,7 +220,7 @@ function App() {
 
 
             </section>
-            <div className="flex w-full items-center justify-center gap-2 border-t pt-8">
+            <div className="flex w-full items-center justify-center gap-2 border-t pt-8 max-[500px]:px-2">
 
                 <input
                     className="md:w-2/3 w-full flex items-center justify-center bg-transparent mb-2 border border-gray-300 rounded-md  outline-none px-4 py-5 dark:bg-gray-900 text-black dark:text-white "
