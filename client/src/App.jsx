@@ -13,11 +13,28 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 function App() {
     const [input, setInput] = useState("");
     const [posts, setPosts] = useState([]);
+    const [darkMode, setDarkMode] = useState(false);
+
+
 
     useEffect(() => {
         document.querySelector(".layout").scrollTop =
             document.querySelector(".layout").scrollHeight;
     }, [posts]);
+
+
+
+
+
+    useEffect(() => {
+        if (darkMode) {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    }, [darkMode]);
+
+
 
     const fetchBotResponse = async () => {
         // Filter messages to keep a clean chat history for OpenAI
@@ -129,24 +146,37 @@ function App() {
     };
 
     return (
-        <main className="chatGPT-app  ">
+        <main className="chatGPT-app min-h-screen  transition-colors duration-300 bg-white dark:bg-gray-900 text-black dark:text-white">
 
-            <divmd className="flex md:items-center md:flex-row flex-col md:gap-0 gap-10 w-full p-2">
-                <div className="relative">
+
+
+            <div className="flex md:items-center justify-between md:flex-row flex-col md:gap-0 gap-10 w-full  border">
+
+                <div className="relative px-2">
                     <img className="md:my-4 my-2 md:ml-8 w-40" src="/ParkClear-new.png" alt="logo" />
 
                     {/* Assistant Badge */}
-                    <span className="absolute md:top-4 md:-right-24 top-2 right-28 bg-gray-100 text-black text-sm px-3 py-2 rounded-xl  shadow-">
+                    <span className="absolute md:top-4 md:-right-24 top-2 right-28 bg-gray-100 dark:bg-gray-800 dark:text-white text-black text-sm px-3 py-2 rounded-xl  shadow-">
                         Assistant
                     </span>
                 </div>
+                <div className="px-2">
+
+                <button
+                    onClick={() => setDarkMode(!darkMode)}
+                    className="bg-gray-300 dark:bg-gray-700 px-4 py-2 rounded-md text-black dark:text-white"
+                >
+                    {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+                </button>
+
+                </div>
 
                 {/* Other content */}
-            </divmd>
+            </div>
 
 
 
-            <section className=" h-[680px]  flex flex-col items-center md:px-10 px-2  bg-[#FFFAF1] rounded-2xl py-6">
+            <section className=" h-[550px]  flex flex-col items-center  px-10  rounded-2xl py-6">
 
                 <div className="layout w-2/3 mb-2">
                     {posts.map((post, index) => (
@@ -182,26 +212,26 @@ function App() {
                         </div>
                     ))}
                 </div>
-                <div className="flex w-full items-center justify-center gap-2 ">
 
-                    <input
-                        className="md:w-2/3 w-full flex items-center justify-center bg-[#FFFAF1] text-black mb-2 border border-gray-400 rounded-md  outline-none px-4 py-5"
-                        value={input}
-                        autoFocus
-                        type="text"
-                        placeholder="Ask ParkClear Assistant... "
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyUp={onKeyUp}
-                    />
-
-
-                    <div className="flex items-center justify-center cursor-pointer py-5 px-3 rounded-md bg-[#eee0c6]" onClick={onSubmit}>
-                        <IoIosArrowRoundForward className="text-black" size={25} />
-                    </div>
-                </div>
 
             </section>
+            <div className="flex w-full items-center justify-center gap-2 border-t pt-8">
 
+                <input
+                    className="md:w-2/3 w-full flex items-center justify-center bg-transparent mb-2 border border-gray-300 rounded-md  outline-none px-4 py-5 dark:bg-gray-900 text-black dark:text-white "
+                    value={input}
+                    autoFocus
+                    type="text"
+                    placeholder="Ask ParkClear Assistant... "
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyUp={onKeyUp}
+                />
+
+
+                <div className="flex items-center justify-center cursor-pointer py-5 px-3 rounded-md bg-gray-200 dark:bg-gray-800" onClick={onSubmit}>
+                    <IoIosArrowRoundForward className="text-black dark:text-white" size={25} />
+                </div>
+            </div>
         </main>
     );
 }
