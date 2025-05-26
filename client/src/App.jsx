@@ -150,7 +150,7 @@ function App() {
 
 
 
-            <div className="flex md:items-center justify-between md:flex-row md:gap-0 gap-10 w-full  border-b">
+            <div className="flex md:items-center justify-between md:flex-row md:gap-0 gap-10 w-full  border-b dark:border-gray-800">
 
                 <div className="relative px-2 flex items-center md:block">
                     <img
@@ -212,7 +212,11 @@ function App() {
                                     />
                                 </div>
                             ) : (
-                                <div className="post">{post.post}</div>
+                                <div
+                                    className="post"
+                                    dangerouslySetInnerHTML={{ __html: post.post }}
+                                ></div>
+
                             )}
                         </div>
                     ))}
@@ -220,10 +224,10 @@ function App() {
 
 
             </section>
-            <div className="flex w-full items-center justify-center gap-2 border-t pt-8 max-[500px]:px-2">
+            <div className="flex w-full items-center justify-center gap-2 border-t dark:border-gray-800 pt-8 max-[500px]:px-2">
 
                 <input
-                    className="md:w-2/3 w-full flex items-center justify-center bg-transparent mb-2 border border-gray-300 rounded-md  outline-none px-4 py-5 dark:bg-gray-900 text-black dark:text-white "
+                    className="md:w-2/3 w-full flex items-center justify-center bg-transparent mb-2 border border-gray-300 dark:border-gray-800  rounded-md  outline-none px-4 py-5 dark:bg-gray-900 text-black dark:text-white "
                     value={input}
                     autoFocus
                     type="text"
